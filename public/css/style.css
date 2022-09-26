@@ -27,6 +27,8 @@
 
     color: white;
     background: #2CAB7B;
+
+    cursor: pointer;
 }
 
 .palavra {
@@ -65,6 +67,8 @@
     background: rgb(172, 205, 236);
     border: 1px solid rgb(65, 130, 204);  
     border-radius: 3px;
+
+    cursor: pointer;
 }
 
 .chute {
@@ -94,6 +98,8 @@
     border: 1px solid rgb(65, 130, 204);
 
     border-radius: 3px;
+
+    cursor: pointer;
 }
 
 .chute button:disabled,
@@ -101,4 +107,5 @@
     color: rgb(98, 100, 100);
     background: rgb(179, 177, 177);
     border: 0px;
+    cursor: default;
 }

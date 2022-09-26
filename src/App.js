@@ -19,17 +19,19 @@ export default function App() {
   const [arrayEscondida, setArrayEscondida] = useState([]);
   const [corPalavra, setCorPalavra] = useState("palavra");
   const [arrayResposta, setArrayResposta] = useState([]);
+  const [chutarPalavra, setChutarPalavra] = useState([]);
   console.log(guardarArrayPalavra);
+
   function ImprimirAlfabeto(props) {
-    return (
-      <button
-        data-identifier="letter"
-        onClick={() => botaoClicado(props.letra)}
-        disabled={desabilitar}
-      >
-        {props.letra}
-      </button>
-    );
+      return (
+        <button
+          data-identifier="letter"
+          onClick={() => botaoClicado(props.letra)}
+          disabled={desabilitar}
+        >
+          {props.letra}
+        </button>
+      );
   }
 
   function iniciarJogo() {
@@ -37,6 +39,7 @@ export default function App() {
     setImagemForca(forca0);
     setContadorErros(1);
     setCorPalavra("palavra");
+    setChutarPalavra("");
     console.log(contadorErros);
 
     let sortearPalavra = palavras[Math.floor(Math.random() * palavras.length)].toUpperCase();
@@ -44,8 +47,7 @@ export default function App() {
     setGuardarPalavra(palavra);
 
     const arrayPalavra = palavra.split("");
-    setGuardarArrayPalavra(arrayPalavra);
-
+    setGuardarArrayPalavra(arrayPalavra)
     let arrayEscondida = [];
     for (let i = 0; i < arrayPalavra.length; i++) {
       arrayEscondida.push("_ ");
@@ -58,13 +60,13 @@ export default function App() {
   }
 
   function verificarLetra(letra) {
+    setChutarPalavra("");
     if (guardarPalavra.includes(letra)) {
       for (let i = 0; i < guardarArrayPalavra.length; i++) {
         if (letra === guardarArrayPalavra[i]) {
           setArrayResposta(i);
-          console.log(arrayResposta)
           arrayEscondida[i] = letra;
-          console.log(arrayEscondida);
+          //console.log(arrayEscondida);
           verificarJogo();
         }
       }
@@ -74,9 +76,9 @@ export default function App() {
     }
   }
 
-  function verificarJogo(){
-    if(!arrayEscondida.includes("_ ")){
-      setDesabilitar(true);    
+  function verificarJogo() {
+    if (!arrayEscondida.includes("_ ")) {
+      setDesabilitar(true);
       setCorPalavra("verde");
     }
   }
@@ -98,11 +100,26 @@ export default function App() {
     }
   }
 
+  function acertarPalavra() {
+    if (chutarPalavra === guardarPalavra) {
+      ganhouJogo();
+    } else {
+      setImagemForca(forca6);
+      perdeuJogo();
+    }
+  }
+
   function perdeuJogo() {
     setDesabilitar(true);
     setArrayEscondida(guardarArrayPalavra);
     setContadorErros(1);
     setCorPalavra("vermelho");
+  }
+  function ganhouJogo() {
+    setDesabilitar(true);
+    setArrayEscondida(guardarArrayPalavra);
+    setContadorErros(1);
+    setCorPalavra("verde");
   }
 
   return (
@@ -123,10 +140,10 @@ export default function App() {
         <div className="letras">
           {alfabeto.map((letra, index) => (
             <ImprimirAlfabeto
-              disabled={desabilitar}
               key={index}
               letra={letra.toUpperCase()}
               index={index}
+              
             />
           ))}
         </div>
@@ -138,8 +155,16 @@ export default function App() {
           data-identifier="type-guess"
           disabled={desabilitar}
           type="text"
+          onChange={(event) =>
+            setChutarPalavra(event.target.value.toUpperCase())
+          }
+          value={chutarPalavra}
         ></input>
-        <button data-identifier="guess-button" disabled={desabilitar}>
+        <button
+          onClick={acertarPalavra}
+          data-identifier="guess-button"
+          disabled={desabilitar}
+        >
           Chutar
         </button>
       </div>
