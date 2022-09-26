@@ -9,7 +9,32 @@ import forca4 from "./assets/forca4.png";
 import forca5 from "./assets/forca5.png";
 import forca6 from "./assets/forca6.png";
 
+
+function ImprimirAlfabeto(props) {
+  if(props.desabilitar === false){
+      return (
+    <button
+      data-identifier="letter"
+      onClick={() => props.botaoClicado(props.letra)}
+      disabled={props.letrasEscolhidas.includes(props.letra)}
+    >
+      {props.letra}
+    </button>
+  );
+  } else {
+    return (
+      <button
+        data-identifier="letter"
+        disabled
+      >
+        {props.letra}
+      </button>
+    );
+  }
+}
+
 export default function App() {
+  const [letrasEscolhidas, setLetrasEscolhidas] = useState([]);
   const [desabilitar, setDesabilitar] = useState(true);
   const [contadorErros, setContadorErros] = useState(1);
   const [imagemForca, setImagemForca] = useState(forca0);
@@ -21,18 +46,6 @@ export default function App() {
   const [arrayResposta, setArrayResposta] = useState([]);
   const [chutarPalavra, setChutarPalavra] = useState([]);
   console.log(guardarArrayPalavra);
-
-  function ImprimirAlfabeto(props) {
-      return (
-        <button
-          data-identifier="letter"
-          onClick={() => botaoClicado(props.letra)}
-          disabled={desabilitar}
-        >
-          {props.letra}
-        </button>
-      );
-  }
 
   function iniciarJogo() {
     setDesabilitar(false);
@@ -56,6 +69,7 @@ export default function App() {
   }
 
   function botaoClicado(letra) {
+    setLetrasEscolhidas([...letrasEscolhidas, letra]);
     verificarLetra(letra);
   }
 
@@ -143,7 +157,9 @@ export default function App() {
               key={index}
               letra={letra.toUpperCase()}
               index={index}
-              
+              botaoClicado={botaoClicado}
+              letrasEscolhidas={letrasEscolhidas}
+              desabilitar={desabilitar}
             />
           ))}
         </div>
@@ -156,7 +172,7 @@ export default function App() {
           disabled={desabilitar}
           type="text"
           onChange={(event) =>
-            setChutarPalavra(event.target.value.toUpperCase())
+            setChutarPalavra(event.target.value.toUpperCase().normalize("NFD").replace(/[\u0300-\u036f]/g, ""))
           }
           value={chutarPalavra}
         ></input>
