@@ -1,0 +1,104 @@
+.jogo {
+    width: 1000px;
+
+    margin: auto;
+    display: flex;
+    justify-content: space-around;
+
+    margin-bottom: 50px;
+}
+
+.jogo img {
+    width: 350px;
+}
+
+.jogo button {
+    width: 150px;
+    height: 50px;
+
+    font-size: 16px;
+    font-weight: 700;
+
+    margin-top: 30px;
+    margin-bottom: 250px;
+
+    border-radius: 5px;
+    border: 0px;
+
+    color: white;
+    background: #2CAB7B;
+}
+
+.palavra {
+    font-size: 40px;
+    font-weight: 700;
+}
+
+.verde{
+    color: green;    
+    font-size: 40px;
+    font-weight: 700;
+}
+
+.vermelho{
+    color: red;
+    font-size: 40px;
+    font-weight: 700;
+}
+
+.letras {
+    width: 770px;
+    gap: 10px;
+
+    display: flex;
+    margin: auto;
+    flex-wrap: wrap;
+}
+
+.letras button {
+    width: 50px;
+    height: 50px;
+
+    font-size: 20px;
+    font-weight: 700;
+    color: rgb(65, 130, 204);  
+    background: rgb(172, 205, 236);
+    border: 1px solid rgb(65, 130, 204);  
+    border-radius: 3px;
+}
+
+.chute {
+    width: 700px;
+    margin: auto;
+    margin-top: 25px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.chute input {
+    height:34px;
+    width: 400px;
+}
+
+.chute button {
+    width: 100px;
+    height: 40px;
+
+    font-size: 15px;
+    font-weight: 700;
+
+    color: rgb(65, 130, 204);
+    background: rgb(193, 219, 243);
+    border: 1px solid rgb(65, 130, 204);
+
+    border-radius: 3px;
+}
+
+.chute button:disabled,
+.letras button:disabled { 
+    color: rgb(98, 100, 100);
+    background: rgb(179, 177, 177);
+    border: 0px;
+}
