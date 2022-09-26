@@ -45,15 +45,14 @@ export default function App() {
   const [corPalavra, setCorPalavra] = useState("palavra");
   const [arrayResposta, setArrayResposta] = useState([]);
   const [chutarPalavra, setChutarPalavra] = useState([]);
-  console.log(guardarArrayPalavra);
 
   function iniciarJogo() {
+    setLetrasEscolhidas([]);
     setDesabilitar(false);
     setImagemForca(forca0);
     setContadorErros(1);
     setCorPalavra("palavra");
     setChutarPalavra("");
-    console.log(contadorErros);
 
     let sortearPalavra = palavras[Math.floor(Math.random() * palavras.length)].toUpperCase();
     const palavra = sortearPalavra.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
@@ -80,7 +79,6 @@ export default function App() {
         if (letra === guardarArrayPalavra[i]) {
           setArrayResposta(i);
           arrayEscondida[i] = letra;
-          //console.log(arrayEscondida);
           verificarJogo();
         }
       }
