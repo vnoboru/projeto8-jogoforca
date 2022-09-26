@@ -64,11 +64,20 @@ export default function App() {
           setArrayResposta(i);
           console.log(arrayResposta)
           arrayEscondida[i] = letra;
+          console.log(arrayEscondida);
+          verificarJogo();
         }
       }
     } else {
       setContadorErros(contadorErros + 1);
       atualizarImagem();
+    }
+  }
+
+  function verificarJogo(){
+    if(!arrayEscondida.includes("_ ")){
+      setDesabilitar(true);    
+      setCorPalavra("verde");
     }
   }
 
